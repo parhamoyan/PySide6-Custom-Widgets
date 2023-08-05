@@ -32,13 +32,12 @@ class ToggleButton(QCheckBox):
     def getIndicatorColorAnimation(self) -> QVariantAnimation:
         indicatorColorAnimation = self.getQVariantAnimation()
         indicatorColorAnimation.valueChanged.connect(self.updateIndicatorColor)
-        match self.isChecked():
-            case True:
-                indicatorColorAnimation.setStartValue(QColor("#ffffff"))
-                indicatorColorAnimation.setEndValue(QColor("#686868"))
-            case False:
-                indicatorColorAnimation.setStartValue(QColor("#ffffff"))
-                indicatorColorAnimation.setEndValue(QColor("#686868"))
+        if self.isChecked():
+            indicatorColorAnimation.setStartValue(QColor("#ffffff"))
+            indicatorColorAnimation.setEndValue(QColor("#686868"))
+        else:
+            indicatorColorAnimation.setStartValue(QColor("#686868"))
+            indicatorColorAnimation.setEndValue(QColor("#ffffff"))
         return indicatorColorAnimation
 
     def updateIndicatorColor(self, newColor) -> None:
