@@ -9,6 +9,7 @@ class MainWindow(QMainWindow):
         QMainWindow.__init__(self)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        self.setStyleSheet("background-color: #333333;")
         self.center()
 
     def center(self) -> None:

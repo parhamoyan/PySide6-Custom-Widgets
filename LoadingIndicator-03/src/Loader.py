@@ -11,7 +11,7 @@ import time
 from perlin_noise import PerlinNoise as Noise
 from typing import Optional
 
-from PySide6.QtCore import QVariantAnimation, QPointF
+from PySide6.QtCore import QVariantAnimation, QPointF, QRect
 from PySide6.QtGui import (QPainter, Qt, QPaintEvent, QColor, QBrush,
                            QPainterPath, QFont)
 from PySide6.QtWidgets import QFrame, QWidget
@@ -31,7 +31,7 @@ class Loader(QFrame):
         self.animation: Optional[QVariantAnimation] = None
         self.noise_generator1 = Noise(octaves=.8, seed=int(time.time()))
         self.noise_generator2 = Noise(octaves=.8, seed=int(time.time() + 1))
-        self.start_animation()
+        # self.start_animation()
 
     def start_animation(self) -> None:
         self.animation = QVariantAnimation(self)
@@ -86,7 +86,6 @@ class Loader(QFrame):
 
         painter.setPen(QColor("white"))
         flags = Qt.AlignHCenter | Qt.AlignVCenter
-        painter.restore()
         painter.drawText(self.rect(), flags, self.message)
 
     def paintEvent(self, e: QPaintEvent) -> None:
@@ -95,7 +94,11 @@ class Loader(QFrame):
         painter.setBrush(QBrush(QColor("#07d9d7")))
         painter.setPen(Qt.NoPen)
 
-        self.draw_deformed_circles(painter)
-        self.draw_message(painter)
+        painter.setBrush(QBrush(QColor("#66FF66")))
+        _rect = QRect(0, 0, 400, 400)
+        _rect.moveCenter(self.rect().center())
+        painter.drawRoundedRect(_rect, 100, 100)
+        # self.draw_deformed_circles(painter)
+        # self.draw_message(painter)
 
         painter.end()
