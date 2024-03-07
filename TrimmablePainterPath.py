@@ -1,7 +1,7 @@
 from PySide6.QtCore import QPointF, QLineF
 from PySide6.QtGui import QPainterPath
 
-
+# TODO: code clean up
 class TrimmablePainterPath(QPainterPath):
     @staticmethod
     def trim(path: QPainterPath, start_percentage: float, end_percentage: float) -> QPainterPath:
